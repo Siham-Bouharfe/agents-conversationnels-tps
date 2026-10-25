@@ -33,4 +33,33 @@ public class GenerateurReponse implements Serializable { // Serializable car CDI
         resultat += question.toLowerCase(Locale.FRENCH) + "||";
         return resultat;
     }
+    public String genererReponseMiroir(String question, String roleSysteme) {
+        String texte = question.toLowerCase(Locale.FRENCH);
+        String humeur;
+        String motDuJour;
+        String message;
+
+        if (texte.contains("stress") || texte.contains("peur")
+                || texte.contains("difficile") || texte.contains("angoiss")) {
+            humeur = "petit stress";
+            motDuJour = "courage";
+            message = "Un pas après l'autre, tu vas y arriver !";
+        } else if (texte.contains("réussi") || texte.contains("reussi")
+                || texte.contains("contente") || texte.contains("heureuse")
+                || texte.contains("fière") || texte.contains("fiere")) {
+            humeur = "victoire";
+            motDuJour = "bravo";
+            message = "Célèbre cette réussite, tu l'as méritée !";
+        } else {
+            humeur = "curiosité";
+            motDuJour = "confiance";
+            message = "Continue à poser des questions et à avancer !";
+        }
+
+        return "✨ Le miroir magique de Siham ✨\n"
+                + "Ta phrase : " + question.trim() + "\n"
+                + "Humeur détectée : " + humeur + "\n"
+                + "Mot du jour : " + motDuJour + "\n"
+                + "Message : " + message;
+    }
 }
