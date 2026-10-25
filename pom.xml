@@ -36,7 +36,13 @@
         <artifactId>junit-jupiter-engine</artifactId>
         <version>${junit.version}</version>
         <scope>test</scope>
-      </dependency>  </dependencies>
+      </dependency>
+      <dependency>
+          <groupId>org.primefaces</groupId>
+          <artifactId>primefaces</artifactId>
+          <version>16.0.0</version>
+      </dependency>
+  </dependencies>
 
   <build>
     <plugins>
