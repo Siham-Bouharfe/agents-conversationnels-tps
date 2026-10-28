@@ -132,13 +132,8 @@ public class Bb implements Serializable {
             // Fige la liste déroulante qui permet de choisir le rôle système
             this.roleSystemeChangeable = false;
         }
-        if ("MIROIR_SIHAM".equals(this.roleSysteme)) {
-            this.reponse = this.generateurReponse.genererReponseMiroir(
-                    this.question, this.roleSysteme);
-        } else {
-            this.reponse = this.generateurReponse.genererReponse(
-                    this.question, this.roleSysteme);
-        }
+        this.reponse = this.generateurReponse.genererReponse(
+                this.question, this.roleSysteme);
         // La conversation contient l'historique des questions-réponses depuis le début.
         afficherConversation();
         return null;
@@ -191,8 +186,6 @@ public class Bb implements Serializable {
                     """;
             this.listeRolesSysteme.add(new SelectItem(role, "Guide touristique"));
 
-            this.listeRolesSysteme.add(
-                    new SelectItem("MIROIR_SIHAM", "Miroir magique de Siham ✨"));
         }
 
         return this.listeRolesSysteme;

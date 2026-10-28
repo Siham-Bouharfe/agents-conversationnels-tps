@@ -25,6 +25,8 @@
                              required="true" requiredMessage="Vous devez indiquer le rôle de l'API"
                              disabled="#{! bb.roleSystemeChangeable}">
                 <f:selectItems value="#{bb.rolesSysteme}"/>
+                <f:selectItem itemValue="MIROIR_SIHAM"
+                              itemLabel="Miroir magique de Siham "/>
             </p:selectOneMenu>
             <!-- Message d'erreur ici si l'utilisateur oublie d'indiquer un rôle système. -->
             <h:message for="rolesysteme" errorStyle="color: red" />

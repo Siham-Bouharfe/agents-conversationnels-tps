@@ -13,28 +13,16 @@ import java.util.Locale;
 @Dependent // Portée CDI pour rendre la classe injectable par CDI dans les autres classes.
 // Portée Dependent : l'instance sera supprimée quand la classe qui l'a injectée sera supprimée.
 public class GenerateurReponse implements Serializable { // Serializable car CDI peut mettre l'instance en mémoire secondaire.
-    private boolean roleSystemeAffiche = false;
+//    private boolean roleSystemeAffiche = false;
 
     /**
-     * Génère une réponse à une question.
-     * @param question La question à modifier.
-     * @param roleSysteme Le rôle système à utiliser pour la modification de la question.
-     * @return La question modifiée : le rôle système en majuscule au début de la question, s'il n'est pas null,
-     * suivi d'un saut de ligne,
-     * puis la question en minuscule, le tout entouré de "||".
+     * Analyse l'humeur exprimée dans la question.
+     * Le rôle système détermine la présentation de la réponse.
      */
     public String genererReponse(String question, String roleSysteme) {
-        String resultat = "||";
-        if (!this.roleSystemeAffiche && roleSysteme != null) {
-            // Ajouter le rôle système en majuscule au début du résultat, suivi d'un saut de ligne.
-            resultat += roleSysteme.toUpperCase(Locale.FRENCH) + "\n";
-            this.roleSystemeAffiche = true;
-        }
-        resultat += question.toLowerCase(Locale.FRENCH) + "||";
-        return resultat;
-    }
-    public String genererReponseMiroir(String question, String roleSysteme) {
-        String texte = question.toLowerCase(Locale.FRENCH);
+        String phrase = question.trim();
+        String texte = phrase.toLowerCase(Locale.FRENCH);
+
         String humeur;
         String motDuJour;
         String message;
@@ -56,10 +44,18 @@ public class GenerateurReponse implements Serializable { // Serializable car CDI
             message = "Continue à poser des questions et à avancer !";
         }
 
-        return "✨ Le miroir magique de Siham ✨\n"
-                + "Ta phrase : " + question.trim() + "\n"
+        String analyse = "Ta phrase : " + phrase + "\n"
                 + "Humeur détectée : " + humeur + "\n"
                 + "Mot du jour : " + motDuJour + "\n"
                 + "Message : " + message;
+
+        if ("MIROIR_SIHAM".equals(roleSysteme)) {
+            return "Le miroir magique de Siham \n"
+                    + analyse + "\nTu brilles à ta façon !";
+        }
+
+        return " Carte d'humeur du jour \n" + analyse;
     }
+
+
 }
